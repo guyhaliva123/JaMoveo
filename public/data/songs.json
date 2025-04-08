@@ -1,0 +1,692 @@
+{
+  "songs": [
+    {
+      "id": "1",
+      "title": "ואיך שלא",
+      "artist": "אריאל זילבר",
+      "image": "data:image/jpeg;base64,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",
+      "lyrics": [
+        [{ "lyrics": "ואיך" }, { "lyrics": "שלא" }],
+        [{ "lyrics": "פתיחה" }],
+        [
+          { "lyrics": "", "chords": "G" },
+          { "lyrics": "", "chords": "C" },
+          { "lyrics": "", "chords": "D" },
+          { "lyrics": "", "chords": "Em" },
+          { "lyrics": "", "chords": "G" },
+          { "lyrics": "", "chords": "C" },
+          { "lyrics": "", "chords": "D" },
+          { "lyrics": "", "chords": "Em" }
+        ],
+        [
+          { "lyrics": "ואיך" },
+          { "lyrics": "ש", "chords": "Em" },
+          { "lyrics": "לא", "chords": "D" },
+          { "lyrics": "אפנה" },
+          { "lyrics": "לראות" }
+        ],
+        [
+          { "lyrics": "תמיד" },
+          { "lyrics": "איתה", "chords": "C" },
+          { "lyrics": "ארצה" },
+          { "lyrics": "להיות", "chords": "G" }
+        ],
+        [
+          { "lyrics": "שומרת", "chords": "Em" },
+          { "lyrics": "לי" },
+          { "lyrics": "היא" },
+          { "lyrics": "אמונים", "chords": "D" }
+        ],
+        [
+          { "lyrics": "לא" },
+          { "lyrics": "מתרוצצת", "chords": "C" },
+          { "lyrics": "בגנים", "chords": "G" }
+        ],
+        [
+          { "lyrics": "וגם" },
+          { "lyrics": "אני", "chords": "Em" },
+          { "lyrics": "בין" },
+          { "lyrics": "הבריות", "chords": "D" }
+        ],
+        [
+          { "lyrics": "לא" },
+          { "lyrics": "מתפתה", "chords": "C" },
+          { "lyrics": "לאחרות", "chords": "G" }
+        ],
+        [
+          { "lyrics": "גלים" },
+          { "lyrics": "עולים", "chords": "Em" },
+          { "lyrics": "חולות" },
+          { "lyrics": "נעים", "chords": "D" }
+        ],
+        [
+          { "lyrics": "אוושת" },
+          { "lyrics": "הרוח", "chords": "C" },
+          { "lyrics": "בעלים", "chords": "G" }
+        ],
+        [
+          { "lyrics": "ובלילות", "chords": "Em" },
+          { "lyrics": "ובלילות", "chords": "D" }
+        ],
+        [
+          { "lyrics": "עולות" },
+          { "lyrics": "עולות", "chords": "C" },
+          { "lyrics": "בי" },
+          { "lyrics": "מנגינות", "chords": "G" }
+        ],
+        [
+          { "lyrics": "וזרם", "chords": "Em" },
+          { "lyrics": "דק", "chords": "D" },
+          { "lyrics": "קולח" }
+        ],
+        [
+          { "lyrics": "ותפילתי", "chords": "C" },
+          { "lyrics": "לרוח" },
+          { "lyrics": "נענות", "chords": "G" }
+        ],
+        [{ "lyrics": "מעבר" }],
+        [
+          { "lyrics": "", "chords": "G" },
+          { "lyrics": "", "chords": "C" },
+          { "lyrics": "", "chords": "D" },
+          { "lyrics": "", "chords": "Em" },
+          { "lyrics": "", "chords": "G" },
+          { "lyrics": "", "chords": "C" },
+          { "lyrics": "", "chords": "D" },
+          { "lyrics": "", "chords": "Em" }
+        ],
+        [
+          { "lyrics": "שקט", "chords": "Em" },
+          { "lyrics": "עכשיו", "chords": "D" }
+        ],
+        [
+          { "lyrics": "וכל" },
+          { "lyrics": "אחד", "chords": "C" },
+          { "lyrics": "עסוק", "chords": "G" },
+          { "lyrics": "בענייניו" }
+        ],
+        [
+          { "lyrics": "אל", "chords": "Em" },
+          { "lyrics": "הרופא", "chords": "D" },
+          { "lyrics": "הכי", "chords": "C" },
+          { "lyrics": "טוב", "chords": "G" }
+        ],
+        [
+          { "lyrics": "בכדי", "chords": "Em" },
+          { "lyrics": "לחשוף", "chords": "D" },
+          { "lyrics": "עד", "chords": "C" },
+          { "lyrics": "הסוף", "chords": "G" }
+        ],
+        [
+          { "lyrics": "אך", "chords": "Em" },
+          { "lyrics": "התמונה", "chords": "D" },
+          { "lyrics": "לא", "chords": "C" },
+          { "lyrics": "משתנה", "chords": "G" }
+        ],
+        [
+          { "lyrics": "מילים", "chords": "Em" },
+          { "lyrics": "מילים", "chords": "D" },
+          { "lyrics": "ואת", "chords": "C" },
+          { "lyrics": "משמעותן", "chords": "G" }
+        ],
+        [
+          { "lyrics": "יבוא", "chords": "Em" },
+          { "lyrics": "לו", "chords": "D" },
+          { "lyrics": "גל", "chords": "C" },
+          { "lyrics": "לשטוף", "chords": "G" }
+        ],
+        [
+          { "lyrics": "אבל", "chords": "Em" },
+          { "lyrics": "אני", "chords": "D" },
+          { "lyrics": "כרוך", "chords": "C" },
+          { "lyrics": "אחריה", "chords": "G" }
+        ],
+        [
+          { "lyrics": "מחכה", "chords": "Em" },
+          { "lyrics": "לי", "chords": "D" },
+          { "lyrics": "בלילות", "chords": "C" },
+          { "lyrics": "" }
+        ],
+        [
+          { "lyrics": "ללכת", "chords": "Em" },
+          { "lyrics": "שבי", "chords": "D" },
+          { "lyrics": "אחריה", "chords": "C" },
+          { "lyrics": "לשמוע", "chords": "G" }
+        ],
+        [{ "lyrics": "את" }, { "lyrics": "הציפורים" }, { "lyrics": "שרות" }],
+        [
+          { "lyrics": "גלים", "chords": "Em" },
+          { "lyrics": "עולים", "chords": "D" },
+          { "lyrics": "חולות", "chords": "C" },
+          { "lyrics": "נעים", "chords": "G" }
+        ],
+        [
+          { "lyrics": "אוושת", "chords": "C" },
+          { "lyrics": "הרוח", "chords": "G" },
+          { "lyrics": "בעלים" }
+        ],
+        [
+          { "lyrics": "מעבר 5X" },
+          { "lyrics": "", "chords": "G" },
+          { "lyrics": "", "chords": "C" },
+          { "lyrics": "", "chords": "D" },
+          { "lyrics": "", "chords": "Em" }
+        ],
+        [
+          { "lyrics": "ואיך", "chords": "Em" },
+          { "lyrics": "שלא", "chords": "D" },
+          { "lyrics": "אפנה", "chords": "C" },
+          { "lyrics": "לראות", "chords": "G" }
+        ],
+        [
+          { "lyrics": "תמיד", "chords": "C" },
+          { "lyrics": "איתה" },
+          { "lyrics": "ארצה" },
+          { "lyrics": "להיות" }
+        ]
+      ]
+    },
+    {
+      "id": "2",
+      "title": "Bohemian Rhapsody",
+      "artist": "Queen",
+      "image": "/placeholder.svg?height=80&width=80",
+      "lyrics": [
+        [{ "lyrics": "Bohemian" }, { "lyrics": "Rhapsody" }],
+        [{ "lyrics": "Intro" }],
+        [
+          { "lyrics": "", "chords": "Bb" },
+          { "lyrics": "", "chords": "F7" },
+          { "lyrics": "", "chords": "Bb" }
+        ],
+        [
+          { "lyrics": "Is" },
+          { "lyrics": "this", "chords": "Bb" },
+          { "lyrics": "the" },
+          { "lyrics": "real" },
+          { "lyrics": "life?" }
+        ],
+        [
+          { "lyrics": "Is" },
+          { "lyrics": "this", "chords": "F7" },
+          { "lyrics": "just" },
+          { "lyrics": "fantasy?" }
+        ],
+        [
+          { "lyrics": "Caught" },
+          { "lyrics": "in", "chords": "Bb" },
+          { "lyrics": "a" },
+          { "lyrics": "landslide" }
+        ],
+        [
+          { "lyrics": "No" },
+          { "lyrics": "escape", "chords": "Bb" },
+          { "lyrics": "from" },
+          { "lyrics": "reality" }
+        ],
+        [
+          { "lyrics": "Open" },
+          { "lyrics": "your", "chords": "Eb" },
+          { "lyrics": "eyes" }
+        ],
+        [
+          { "lyrics": "Look" },
+          { "lyrics": "up", "chords": "Bb" },
+          { "lyrics": "to" },
+          { "lyrics": "the" },
+          { "lyrics": "skies" },
+          { "lyrics": "and" },
+          { "lyrics": "see" }
+        ],
+        [
+          { "lyrics": "I'm" },
+          { "lyrics": "just", "chords": "Eb" },
+          { "lyrics": "a" },
+          { "lyrics": "poor" },
+          { "lyrics": "boy," },
+          { "lyrics": "I" },
+          { "lyrics": "need" },
+          { "lyrics": "no" },
+          { "lyrics": "sympathy" }
+        ],
+        [
+          { "lyrics": "Because" },
+          { "lyrics": "I'm", "chords": "Bb" },
+          { "lyrics": "easy" },
+          { "lyrics": "come," },
+          { "lyrics": "easy" },
+          { "lyrics": "go" }
+        ],
+        [
+          { "lyrics": "Little" },
+          { "lyrics": "high,", "chords": "F7" },
+          { "lyrics": "little" },
+          { "lyrics": "low" }
+        ],
+        [
+          { "lyrics": "Any" },
+          { "lyrics": "way", "chords": "Bb" },
+          { "lyrics": "the" },
+          { "lyrics": "wind" },
+          { "lyrics": "blows" },
+          { "lyrics": "doesn't" },
+          { "lyrics": "really" },
+          { "lyrics": "matter" },
+          { "lyrics": "to" },
+          { "lyrics": "me," },
+          { "lyrics": "to" },
+          { "lyrics": "me" }
+        ]
+      ]
+    },
+    {
+      "id": "3",
+      "title": "Imagine",
+      "artist": "John Lennon",
+      "image": "/placeholder.svg?height=80&width=80",
+      "lyrics": [
+        [{ "lyrics": "Imagine" }],
+        [{ "lyrics": "Intro" }],
+        [
+          { "lyrics": "", "chords": "C" },
+          { "lyrics": "", "chords": "F" }
+        ],
+        [
+          { "lyrics": "Imagine" },
+          { "lyrics": "there's", "chords": "C" },
+          { "lyrics": "no" },
+          { "lyrics": "heaven" }
+        ],
+        [
+          { "lyrics": "It's" },
+          { "lyrics": "easy", "chords": "F" },
+          { "lyrics": "if" },
+          { "lyrics": "you" },
+          { "lyrics": "try" }
+        ],
+        [
+          { "lyrics": "No" },
+          { "lyrics": "hell", "chords": "C" },
+          { "lyrics": "below" },
+          { "lyrics": "us" }
+        ],
+        [
+          { "lyrics": "Above" },
+          { "lyrics": "us", "chords": "F" },
+          { "lyrics": "only" },
+          { "lyrics": "sky" }
+        ],
+        [
+          { "lyrics": "Imagine" },
+          { "lyrics": "all", "chords": "C" },
+          { "lyrics": "the" },
+          { "lyrics": "people" }
+        ],
+        [
+          { "lyrics": "Living" },
+          { "lyrics": "for", "chords": "F" },
+          { "lyrics": "today" }
+        ],
+        [{ "lyrics": "Verse 2" }],
+        [
+          { "lyrics": "Imagine" },
+          { "lyrics": "there's", "chords": "C" },
+          { "lyrics": "no" },
+          { "lyrics": "countries" }
+        ],
+        [
+          { "lyrics": "It" },
+          { "lyrics": "isn't", "chords": "F" },
+          { "lyrics": "hard" },
+          { "lyrics": "to" },
+          { "lyrics": "do" }
+        ],
+        [
+          { "lyrics": "Nothing" },
+          { "lyrics": "to", "chords": "C" },
+          { "lyrics": "kill" },
+          { "lyrics": "or" },
+          { "lyrics": "die" },
+          { "lyrics": "for" }
+        ],
+        [
+          { "lyrics": "And" },
+          { "lyrics": "no", "chords": "F" },
+          { "lyrics": "religion" },
+          { "lyrics": "too" }
+        ],
+        [
+          { "lyrics": "Imagine" },
+          { "lyrics": "all", "chords": "C" },
+          { "lyrics": "the" },
+          { "lyrics": "people" }
+        ],
+        [
+          { "lyrics": "Living" },
+          { "lyrics": "life", "chords": "F" },
+          { "lyrics": "in" },
+          { "lyrics": "peace" }
+        ]
+      ]
+    },
+    {
+      "id": "4",
+      "title": "Wonderwall",
+      "artist": "Oasis",
+      "image": "/placeholder.svg?height=80&width=80",
+      "lyrics": [
+        [{ "lyrics": "Wonderwall" }],
+        [{ "lyrics": "Intro" }],
+        [
+          { "lyrics": "", "chords": "Em" },
+          { "lyrics": "", "chords": "G" },
+          { "lyrics": "", "chords": "D" },
+          { "lyrics": "", "chords": "A7sus4" }
+        ],
+        [
+          { "lyrics": "Today" },
+          { "lyrics": "is", "chords": "Em" },
+          { "lyrics": "gonna" },
+          { "lyrics": "be" },
+          { "lyrics": "the" },
+          { "lyrics": "day" }
+        ],
+        [
+          { "lyrics": "That" },
+          { "lyrics": "they're", "chords": "G" },
+          { "lyrics": "gonna" },
+          { "lyrics": "throw" },
+          { "lyrics": "it" },
+          { "lyrics": "back" },
+          { "lyrics": "to" },
+          { "lyrics": "you" }
+        ],
+        [
+          { "lyrics": "By" },
+          { "lyrics": "now", "chords": "D" },
+          { "lyrics": "you" },
+          { "lyrics": "should've" },
+          { "lyrics": "somehow" }
+        ],
+        [
+          { "lyrics": "Realized" },
+          { "lyrics": "what", "chords": "A7sus4" },
+          { "lyrics": "you" },
+          { "lyrics": "gotta" },
+          { "lyrics": "do" }
+        ],
+        [
+          { "lyrics": "I" },
+          { "lyrics": "don't", "chords": "Em" },
+          { "lyrics": "believe" },
+          { "lyrics": "that" },
+          { "lyrics": "anybody" }
+        ],
+        [
+          { "lyrics": "Feels" },
+          { "lyrics": "the", "chords": "G" },
+          { "lyrics": "way" },
+          { "lyrics": "I" },
+          { "lyrics": "do" },
+          { "lyrics": "about" },
+          { "lyrics": "you" },
+          { "lyrics": "now" }
+        ],
+        [
+          { "lyrics": "Backbeat," },
+          { "lyrics": "the", "chords": "D" },
+          { "lyrics": "word" },
+          { "lyrics": "is" },
+          { "lyrics": "on" },
+          { "lyrics": "the" },
+          { "lyrics": "street" }
+        ],
+        [
+          { "lyrics": "That" },
+          { "lyrics": "the", "chords": "A7sus4" },
+          { "lyrics": "fire" },
+          { "lyrics": "in" },
+          { "lyrics": "your" },
+          { "lyrics": "heart" },
+          { "lyrics": "is" },
+          { "lyrics": "out" }
+        ],
+        [
+          { "lyrics": "I'm" },
+          { "lyrics": "sure", "chords": "Em" },
+          { "lyrics": "you've" },
+          { "lyrics": "heard" },
+          { "lyrics": "it" },
+          { "lyrics": "all" },
+          { "lyrics": "before" }
+        ],
+        [
+          { "lyrics": "But" },
+          { "lyrics": "you", "chords": "G" },
+          { "lyrics": "never" },
+          { "lyrics": "really" },
+          { "lyrics": "had" },
+          { "lyrics": "a" },
+          { "lyrics": "doubt" }
+        ],
+        [
+          { "lyrics": "I" },
+          { "lyrics": "don't", "chords": "D" },
+          { "lyrics": "believe" },
+          { "lyrics": "that" },
+          { "lyrics": "anybody" }
+        ],
+        [
+          { "lyrics": "Feels" },
+          { "lyrics": "the", "chords": "A7sus4" },
+          { "lyrics": "way" },
+          { "lyrics": "I" },
+          { "lyrics": "do" },
+          { "lyrics": "about" },
+          { "lyrics": "you" },
+          { "lyrics": "now" }
+        ]
+      ]
+    },
+    {
+      "id": "5",
+      "title": "Hotel California",
+      "artist": "Eagles",
+      "image": "/placeholder.svg?height=80&width=80",
+      "lyrics": [
+        [{ "lyrics": "Hotel" }, { "lyrics": "California" }],
+        [{ "lyrics": "Intro" }],
+        [
+          { "lyrics": "", "chords": "Bm" },
+          { "lyrics": "", "chords": "F#" },
+          { "lyrics": "", "chords": "A" },
+          { "lyrics": "", "chords": "E" }
+        ],
+        [
+          { "lyrics": "On" },
+          { "lyrics": "a", "chords": "Bm" },
+          { "lyrics": "dark" },
+          { "lyrics": "desert" },
+          { "lyrics": "highway" }
+        ],
+        [
+          { "lyrics": "Cool" },
+          { "lyrics": "wind", "chords": "F#" },
+          { "lyrics": "in" },
+          { "lyrics": "my" },
+          { "lyrics": "hair" }
+        ],
+        [
+          { "lyrics": "Warm" },
+          { "lyrics": "smell", "chords": "A" },
+          { "lyrics": "of" },
+          { "lyrics": "colitas" }
+        ],
+        [
+          { "lyrics": "Rising" },
+          { "lyrics": "up", "chords": "E" },
+          { "lyrics": "through" },
+          { "lyrics": "the" },
+          { "lyrics": "air" }
+        ],
+        [
+          { "lyrics": "Up" },
+          { "lyrics": "ahead", "chords": "G" },
+          { "lyrics": "in" },
+          { "lyrics": "the" },
+          { "lyrics": "distance" }
+        ],
+        [
+          { "lyrics": "I" },
+          { "lyrics": "saw", "chords": "D" },
+          { "lyrics": "a" },
+          { "lyrics": "shimmering" },
+          { "lyrics": "light" }
+        ],
+        [
+          { "lyrics": "My" },
+          { "lyrics": "head", "chords": "Em" },
+          { "lyrics": "grew" },
+          { "lyrics": "heavy" },
+          { "lyrics": "and" },
+          { "lyrics": "my" },
+          { "lyrics": "sight" },
+          { "lyrics": "grew" },
+          { "lyrics": "dim" }
+        ],
+        [
+          { "lyrics": "I" },
+          { "lyrics": "had", "chords": "F#" },
+          { "lyrics": "to" },
+          { "lyrics": "stop" },
+          { "lyrics": "for" },
+          { "lyrics": "the" },
+          { "lyrics": "night" }
+        ]
+      ]
+    },
+    {
+      "id": "6",
+      "title": "Let It Be",
+      "artist": "The Beatles",
+      "image": "/placeholder.svg?height=80&width=80",
+      "lyrics": [
+        [{ "lyrics": "Let" }, { "lyrics": "It" }, { "lyrics": "Be" }],
+        [{ "lyrics": "Intro" }],
+        [
+          { "lyrics": "", "chords": "C" },
+          { "lyrics": "", "chords": "G" },
+          { "lyrics": "", "chords": "Am" },
+          { "lyrics": "", "chords": "F" }
+        ],
+        [
+          { "lyrics": "When" },
+          { "lyrics": "I", "chords": "C" },
+          { "lyrics": "find" },
+          { "lyrics": "myself" },
+          { "lyrics": "in" },
+          { "lyrics": "times" },
+          { "lyrics": "of" },
+          { "lyrics": "trouble" }
+        ],
+        [
+          { "lyrics": "Mother" },
+          { "lyrics": "Mary", "chords": "G" },
+          { "lyrics": "comes" },
+          { "lyrics": "to" },
+          { "lyrics": "me" }
+        ],
+        [
+          { "lyrics": "Speaking" },
+          { "lyrics": "words", "chords": "Am" },
+          { "lyrics": "of" },
+          { "lyrics": "wisdom," },
+          { "lyrics": "let" },
+          { "lyrics": "it" },
+          { "lyrics": "be" }
+        ],
+        [
+          { "lyrics": "And" },
+          { "lyrics": "in", "chords": "F" },
+          { "lyrics": "my" },
+          { "lyrics": "hour" },
+          { "lyrics": "of" },
+          { "lyrics": "darkness" }
+        ],
+        [
+          { "lyrics": "She" },
+          { "lyrics": "is", "chords": "C" },
+          { "lyrics": "standing" },
+          { "lyrics": "right" },
+          { "lyrics": "in" },
+          { "lyrics": "front" },
+          { "lyrics": "of" },
+          { "lyrics": "me" }
+        ],
+        [
+          { "lyrics": "Speaking" },
+          { "lyrics": "words", "chords": "G" },
+          { "lyrics": "of" },
+          { "lyrics": "wisdom," },
+          { "lyrics": "let" },
+          { "lyrics": "it" },
+          { "lyrics": "be" }
+        ]
+      ]
+    },
+    {
+      "id": "7",
+      "title": "Yesterday",
+      "artist": "The Beatles",
+      "image": "/placeholder.svg?height=80&width=80",
+      "lyrics": [
+        [{ "lyrics": "Yesterday" }],
+        [{ "lyrics": "Intro" }],
+        [
+          { "lyrics": "", "chords": "C" },
+          { "lyrics": "", "chords": "G" }
+        ],
+        [
+          { "lyrics": "Yesterday," },
+          { "lyrics": "all", "chords": "C" },
+          { "lyrics": "my" },
+          { "lyrics": "troubles" },
+          { "lyrics": "seemed" },
+          { "lyrics": "so" },
+          { "lyrics": "far" },
+          { "lyrics": "away" }
+        ],
+        [
+          { "lyrics": "Now" },
+          { "lyrics": "it", "chords": "G" },
+          { "lyrics": "looks" },
+          { "lyrics": "as" },
+          { "lyrics": "though" },
+          { "lyrics": "they're" },
+          { "lyrics": "here" },
+          { "lyrics": "to" },
+          { "lyrics": "stay" }
+        ],
+        [
+          { "lyrics": "Oh," },
+          { "lyrics": "I", "chords": "C" },
+          { "lyrics": "believe" },
+          { "lyrics": "in" },
+          { "lyrics": "yesterday" }
+        ],
+        [
+          { "lyrics": "Suddenly," },
+          { "lyrics": "I'm", "chords": "G" },
+          { "lyrics": "not" },
+          { "lyrics": "half" },
+          { "lyrics": "the" },
+          { "lyrics": "man" },
+          { "lyrics": "I" },
+          { "lyrics": "used" },
+          { "lyrics": "to" },
+          { "lyrics": "be" }
+        ]
+      ]
+    }
+  ]
+}

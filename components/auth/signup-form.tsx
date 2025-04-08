@@ -113,12 +113,42 @@ export default function SignupForm() {
                 <SelectValue placeholder="Select your instrument" />
               </SelectTrigger>
               <SelectContent className="bg-white">
-                <SelectItem value="DRUMS">Drums</SelectItem>
-                <SelectItem value="GUITAR">Guitar</SelectItem>
-                <SelectItem value="BASS">Bass</SelectItem>
-                <SelectItem value="SAXOPHONE">Saxophone</SelectItem>
-                <SelectItem value="KEYBOARD">Keyboard</SelectItem>
-                <SelectItem value="VOCALS">Vocals</SelectItem>
+                <SelectItem
+                  value="DRUMS"
+                  className="hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition-colors"
+                >
+                  Drums
+                </SelectItem>
+                <SelectItem
+                  value="GUITAR"
+                  className="hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition-colors"
+                >
+                  Guitar
+                </SelectItem>
+                <SelectItem
+                  value="BASS"
+                  className="hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition-colors"
+                >
+                  Bass
+                </SelectItem>
+                <SelectItem
+                  value="SAXOPHONE"
+                  className="hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition-colors"
+                >
+                  Saxophone
+                </SelectItem>
+                <SelectItem
+                  value="KEYBOARD"
+                  className="hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition-colors"
+                >
+                  Keyboard
+                </SelectItem>
+                <SelectItem
+                  value="VOCALS"
+                  className="hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition-colors"
+                >
+                  Vocals
+                </SelectItem>
               </SelectContent>
             </Select>
           </div>
