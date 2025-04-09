@@ -32,7 +32,7 @@ export default function LoginForm() {
     }
 
     if (result.success) {
-      router.push("/dashboard");
+      router.push("/");
       router.refresh();
     }
   };
