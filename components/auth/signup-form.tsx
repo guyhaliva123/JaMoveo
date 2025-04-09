@@ -167,7 +167,7 @@ export default function SignupForm({ showRoleSelect }: SignupFormProps) {
       {!isLoading && (
         <CardFooter className="flex justify-center">
           <div className="text-sm text-gray-500">
-            Already have an account?
+            Already have an account?{" "}
             <Link href="/login" className="text-blue-500 hover:underline">
               Log in
             </Link>

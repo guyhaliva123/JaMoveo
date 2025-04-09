@@ -38,53 +38,55 @@ export default function LoginForm() {
   };
 
   return (
-    <Card className="w-full bg-white shadow-lg">
-      <CardHeader className="space-y-1">
-        <CardTitle className="text-2xl font-bold text-center">
-          Welcome back
-        </CardTitle>
-        <CardDescription className="text-center">
-          Enter your email to sign in to your account
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="space-y-2">
-            <Input
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              className="w-full border-gray-300"
-            />
+    <div>
+      <Card className="w-full bg-white shadow-lg">
+        <CardHeader className="space-y-1">
+          <CardTitle className="text-2xl font-bold text-center">
+            Welcome back
+          </CardTitle>
+          <CardDescription className="text-center">
+            Enter your email to sign in to your account
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="space-y-2">
+              <Input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="w-full border-gray-300"
+              />
+            </div>
+            <div className="space-y-2">
+              <Input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                className="w-full border-gray-300"
+              />
+            </div>
+            <Button
+              type="submit"
+              className="w-full bg-blue-500 hover:bg-blue-600 text-white"
+            >
+              Log in
+            </Button>
+          </form>
+        </CardContent>
+        <CardFooter className="flex justify-center">
+          <div className="text-sm text-gray-500">
+            Don&apos;t have an account?{" "}
+            <Link href="/sign-up" className="text-blue-500 hover:underline">
+              Sign up
+            </Link>
           </div>
-          <div className="space-y-2">
-            <Input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              className="w-full border-gray-300"
-            />
-          </div>
-          <Button
-            type="submit"
-            className="w-full bg-blue-500 hover:bg-blue-600 text-white"
-          >
-            Log in
-          </Button>
-        </form>
-      </CardContent>
-      <CardFooter className="flex justify-center">
-        <div className="text-sm text-gray-500">
-          Don&apos;t have an account?{" "}
-          <Link href="/sign-up" className="text-blue-500 hover:underline">
-            Sign up
-          </Link>
-        </div>
-      </CardFooter>
-    </Card>
+        </CardFooter>
+      </Card>
+    </div>
   );
 }
