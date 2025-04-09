@@ -1,6 +1,6 @@
 "use client";
 // Main admin dashboard (search page + dashboard stats)
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { SearchInput } from "@/components/ui/searchInput";
 import { LogoutButton } from "@/components/auth/logout-button";
 import { useSearchStore } from "@/lib/searchStore";

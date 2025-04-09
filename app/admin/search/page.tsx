@@ -1,12 +1,13 @@
 "use client";
 // Song search page with input and results list
+import React, { Suspense, useEffect } from "react";
 import { SearchInput } from "@/components/ui/searchInput";
 import { useSearchStore } from "@/lib/searchStore";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
 import Image from "next/image";
 
-export default function SearchPage() {
+// This component uses the client-side hooks
+function SearchContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const query = searchParams.get("query") || "";
@@ -19,44 +20,72 @@ export default function SearchPage() {
   }, [query, searchSongs]);
 
   const handleSearch = async (newQuery: string) => {
-    await searchSongs(newQuery);
     router.push(`/admin/search?query=${encodeURIComponent(newQuery)}`);
   };
 
   return (
-    <div className="min-h-screen  bg-gradient-to-br from-green-100 via-yellow-50 to-pink-100">
+    <>
+      <div className="w-full max-w-2xl mx-auto">
+        <SearchInput
+          placeholder="Search any song..."
+          onSearch={handleSearch}
+          className="w-full"
+          defaultValue={query}
+        />
+      </div>
+
+      {isLoading ? (
+        <div className="flex justify-center py-8">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500" />
+        </div>
+      ) : results.length > 0 ? (
+        <div className="space-y-4">
+          <div className="bg-white rounded-lg shadow divide-y">
+            {results.map((song) => (
+              <SongItem key={song.id} song={song} />
+            ))}
+          </div>
+        </div>
+      ) : query && !isLoading ? (
+        <div className="text-center text-gray-500 py-8">
+          No songs found for &quot;{query}&quot;
+        </div>
+      ) : !query && !isLoading ? (
+        <div className="text-center text-gray-500 py-8">
+          Enter a search term above to find songs.
+        </div>
+      ) : null}
+    </>
+  );
+}
+
+// This remains the main page component (can be a Server Component)
+export default function SearchPage() {
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-green-100 via-yellow-50 to-pink-100">
       <div className="max-w-4xl mx-auto p-6 space-y-8">
         <h1 className="text-3xl font-bold text-center text-gray-800">
-          Search Results
+          Search Songs
         </h1>
-
-        <div className="w-full max-w-2xl mx-auto">
-          <SearchInput
-            placeholder="Search any song..."
-            onSearch={handleSearch}
-            className="w-full"
-          />
-        </div>
-
-        {isLoading ? (
-          <div className="flex justify-center py-8">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500" />
-          </div>
-        ) : results.length > 0 ? (
-          <div className="space-y-4">
-            <div className="bg-white rounded-lg shadow divide-y">
-              {results.map((song) => (
-                <SongItem key={song.id} song={song} />
-              ))}
-            </div>
-          </div>
-        ) : query && !isLoading ? (
-          <div className="text-center text-gray-500 py-8">
-            No songs found for "{query}"
-          </div>
-        ) : null}
+        <Suspense fallback={<SearchLoadingFallback />}>
+          <SearchContent />
+        </Suspense>
       </div>
     </div>
+  );
+}
+
+// Optional: A fallback UI to show while SearchContent loads
+function SearchLoadingFallback() {
+  return (
+    <>
+      <div className="w-full max-w-2xl mx-auto">
+        <div className="h-10 bg-gray-200 rounded animate-pulse"></div>
+      </div>
+      <div className="flex justify-center py-8">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500" />
+      </div>
+    </>
   );
 }
 

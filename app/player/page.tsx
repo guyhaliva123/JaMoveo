@@ -20,7 +20,9 @@ export default function PlayerPage() {
       <div className="flex flex-col items-center justify-center min-h-screen gap-8 p-4">
         <div className="text-center">
           <h1 className="text-3xl font-bold mb-4">Waiting for next song</h1>
-          <p className="text-gray-600">The admin hasn't selected a song yet</p>
+          <p className="text-gray-600">
+            The admin hasn&apos;t selected a song yet
+          </p>
         </div>
         <div className="absolute top-4 right-4">
           <LogoutButton />

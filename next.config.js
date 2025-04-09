@@ -7,7 +7,7 @@ const nextConfig = {
     ignoreBuildErrors: false,
   },
   experimental: {
-    serverActions: true,
+    serverActions: {},
   },
 };
 

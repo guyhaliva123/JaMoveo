@@ -28,7 +28,7 @@ export function LogoutButton({ className }: LogoutButtonProps) {
         onClick={handleLogout}
         disabled={isLoading}
         variant="destructive"
-        className="bg-red-500"
+        className={`bg-red-500 ${className || ""}`}
       >
         {isLoading ? (
           <div className="flex items-center gap-2">

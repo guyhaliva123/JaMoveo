@@ -5,10 +5,10 @@ import { Server } from "socket.io";
 export const runtime = "nodejs"; // <-- ensure we run on Node.js, not the Edge
 export const dynamic = "force-dynamic"; // <-- no caching
 
-export async function GET(request: Request) {
+export async function GET() {
   // This "res" object gives us access to the underlying Node.js server
   const res = NextResponse.next();
-  // @ts-ignore
+  // @ts-expect-error Server implementation is not fully typed
   const { server } = res.socket;
   if (!server.io) {
     console.log("🚀 Initializing Socket.IO on /api/socket");

@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { useRouter } from "next/navigation";
 import { useWebSocket } from "@/lib/websocket-context";
 
 export default function LiveAdminPage() {
