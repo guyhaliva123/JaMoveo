@@ -12,10 +12,8 @@ export async function checkAdminExists() {
     if (admin) {
       console.log("Admin exists");
       return true;
-    } else {
-      console.log("Admin does not exist");
-      return false;
     }
+    return false;
   } catch (error) {
     console.error("Error checking admin count:", error);
     return false; // Default to true to prevent admin creation on error
