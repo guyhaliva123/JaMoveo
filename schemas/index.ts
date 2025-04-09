@@ -1,5 +1,5 @@
 import * as z from "zod";
-import { Instrument } from "@prisma/client";
+import { Instrument, UserRole } from "@prisma/client";
 
 export const LoginSchema = z.object({
   email: z.string().email({
@@ -20,10 +20,10 @@ export const RegisterSchema = z.object({
   password: z.string().min(6, {
     message: "Password must be at least 6 characters",
   }),
-
   instrument: z.nativeEnum(Instrument, {
     message: "Please select an instrument",
   }),
+  role: z.nativeEnum(UserRole).optional(),
 });
 
 export type RegisterValues = z.infer<typeof RegisterSchema>;

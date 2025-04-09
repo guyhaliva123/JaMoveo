@@ -1,0 +1,23 @@
+"use server";
+
+import { prisma } from "@/lib/db";
+
+export async function checkAdminExists() {
+  try {
+    const admin = await prisma.user.findFirst({
+      where: {
+        role: "ADMIN",
+      },
+    });
+    if (admin) {
+      console.log("Admin exists");
+      return true;
+    } else {
+      console.log("Admin does not exist");
+      return false;
+    }
+  } catch (error) {
+    console.error("Error checking admin count:", error);
+    return false; // Default to true to prevent admin creation on error
+  }
+}

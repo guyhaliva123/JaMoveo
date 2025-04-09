@@ -1,8 +1,7 @@
 "use client";
 
-import type React from "react";
-
-import { useState } from "react";
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -22,14 +21,18 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { signup } from "@/actions/signup";
-import { useRouter } from "next/navigation";
-import { Instrument } from "@prisma/client";
+import { Instrument, UserRole } from "@prisma/client";
 import ClipLoader from "react-spinners/ClipLoader";
 
-export default function SignupForm() {
+interface SignupFormProps {
+  showRoleSelect: boolean;
+}
+
+export default function SignupForm({ showRoleSelect }: SignupFormProps) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [instrument, setInstrument] = useState("");
+  const [role, setRole] = useState<UserRole | "">("");
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
@@ -44,6 +47,7 @@ export default function SignupForm() {
         email,
         password,
         instrument: instrument as Instrument,
+        role: (role as UserRole) || "REGULAR",
       });
 
       if (result.error) {
@@ -103,6 +107,27 @@ export default function SignupForm() {
               }`}
             />
           </div>
+
+          {/* Role Selection - Only shown if no admin exists */}
+          {showRoleSelect && (
+            <div className="space-y-2">
+              <Select
+                value={role}
+                onValueChange={(value) => setRole(value as UserRole)}
+                disabled={isLoading}
+              >
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Select your role" />
+                </SelectTrigger>
+                <SelectContent className="bg-white">
+                  <SelectItem value="ADMIN">Admin</SelectItem>
+                  <SelectItem value="REGULAR">Regular</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          )}
+
+          {/* Instrument Selection */}
           <div className="space-y-2">
             <Select
               value={instrument}
@@ -113,45 +138,16 @@ export default function SignupForm() {
                 <SelectValue placeholder="Select your instrument" />
               </SelectTrigger>
               <SelectContent className="bg-white">
-                <SelectItem
-                  value="DRUMS"
-                  className="hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition-colors"
-                >
-                  Drums
-                </SelectItem>
-                <SelectItem
-                  value="GUITAR"
-                  className="hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition-colors"
-                >
-                  Guitar
-                </SelectItem>
-                <SelectItem
-                  value="BASS"
-                  className="hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition-colors"
-                >
-                  Bass
-                </SelectItem>
-                <SelectItem
-                  value="SAXOPHONE"
-                  className="hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition-colors"
-                >
-                  Saxophone
-                </SelectItem>
-                <SelectItem
-                  value="KEYBOARD"
-                  className="hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition-colors"
-                >
-                  Keyboard
-                </SelectItem>
-                <SelectItem
-                  value="VOCALS"
-                  className="hover:bg-blue-50 hover:text-blue-600 cursor-pointer transition-colors"
-                >
-                  Vocals
-                </SelectItem>
+                <SelectItem value="DRUMS">Drums</SelectItem>
+                <SelectItem value="GUITAR">Guitar</SelectItem>
+                <SelectItem value="BASS">Bass</SelectItem>
+                <SelectItem value="SAXOPHONE">Saxophone</SelectItem>
+                <SelectItem value="KEYBOARD">Keyboard</SelectItem>
+                <SelectItem value="VOCALS">Vocals</SelectItem>
               </SelectContent>
             </Select>
           </div>
+
           <Button
             type="submit"
             disabled={isLoading}

@@ -1,32 +1,65 @@
 "use client";
 // Main admin dashboard (search page + dashboard stats)
+import { useEffect, useState } from "react";
 import { SearchInput } from "@/components/ui/searchInput";
 import { LogoutButton } from "@/components/auth/logout-button";
 import { useSearchStore } from "@/lib/searchStore";
 import { useRouter } from "next/navigation";
 import songsData from "@/public/data/songs.json";
+import { useWebSocket } from "@/lib/websocket-context";
 
 export default function AdminDashboard() {
   const router = useRouter();
+  const { socket } = useWebSocket(); // get the shared socket
   const { searchSongs } = useSearchStore();
   const totalSongs = songsData.songs.length;
 
+  // Listen for admin's own selection (or any broadcast)…
+  useEffect(() => {
+    if (!socket) return;
+
+    socket.on("songSelected", () => {
+      router.push("/admin/live");
+    });
+    return () => {
+      socket.off("songSelected");
+    };
+  }, [socket, router]);
+
   const handleSearch = async (query: string) => {
     await searchSongs(query);
-    router.push(`/admin/search?query=${encodeURIComponent(query)}`);
+    router.push("/admin/results");
   };
 
+  function StatsCard({
+    title,
+    value,
+    icon,
+  }: {
+    title: string;
+    value: string;
+    icon: string;
+  }) {
+    return (
+      <div className="bg-white rounded-lg shadow p-6">
+        <div className="flex items-center">
+          <div className="text-2xl mr-4">{icon}</div>
+          <div>
+            <p className="text-sm font-medium text-gray-600">{title}</p>
+            <p className="text-2xl font-semibold text-gray-900">{value}</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="min-h-screen  bg-gradient-to-br from-green-100 via-yellow-50 to-pink-100">
+    <div className="min-h-screen bg-gradient-to-br from-green-100 via-yellow-50 to-pink-100">
       {/* Header */}
       <header className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex items-center justify-between">
-            <h1 className="text-2xl font-bold text-gray-900">
-              Admin Dashboard
-            </h1>
-            <LogoutButton />
-          </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+          <h1 className="text-2xl font-bold text-gray-900">Admin Dashboard</h1>
+          <LogoutButton />
         </div>
       </header>
 
@@ -62,34 +95,10 @@ export default function AdminDashboard() {
             </h2>
           </div>
           <div className="p-6">
-            {/* Add your activity content here */}
             <p className="text-gray-500">No recent activity</p>
           </div>
         </div>
       </main>
-    </div>
-  );
-}
-
-// Stats Card Component
-function StatsCard({
-  title,
-  value,
-  icon,
-}: {
-  title: string;
-  value: string;
-  icon: string;
-}) {
-  return (
-    <div className="bg-white rounded-lg shadow p-6">
-      <div className="flex items-center">
-        <div className="text-2xl mr-4">{icon}</div>
-        <div>
-          <p className="text-sm font-medium text-gray-600">{title}</p>
-          <p className="text-2xl font-semibold text-gray-900">{value}</p>
-        </div>
-      </div>
     </div>
   );
 }

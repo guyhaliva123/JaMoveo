@@ -1,8 +1,10 @@
 "use client";
-// Results page that displays search results
-import { useState } from "react";
+// Results page that displays search results and starts the rehearsal
 import { useSearchStore } from "@/lib/searchStore";
-import ChordDisplay from "@/components/ChordDisplay";
+import { useRouter } from "next/navigation";
+import { useWebSocket } from "@/lib/websocket-context";
+import Image from "next/image";
+import { SearchInput } from "@/components/ui/searchInput";
 
 interface LyricLine {
   lyrics: string;
@@ -14,90 +16,107 @@ interface SongDetails {
   title: string;
   artist: string;
   lyrics: LyricLine[][];
+  image?: string;
+}
+
+function SongItem({
+  song,
+  onSelect,
+}: {
+  song: SongDetails;
+  onSelect: (song: SongDetails) => void;
+}) {
+  return (
+    <div className="p-4 hover:bg-gray-50 transition-colors">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-4">
+          <div className="relative w-16 h-16 rounded-md overflow-hidden">
+            {song.image ? (
+              <Image
+                src={song.image}
+                alt={`${song.title} album art`}
+                fill
+                className="object-cover"
+              />
+            ) : (
+              <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+                <span className="text-gray-400">🎵</span>
+              </div>
+            )}
+          </div>
+          <div>
+            <h3 className="text-lg font-medium text-gray-900">{song.title}</h3>
+            <p className="text-sm text-gray-500">{song.artist}</p>
+          </div>
+        </div>
+        <button
+          onClick={() => onSelect(song)}
+          className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors"
+        >
+          Start Rehearsal
+        </button>
+      </div>
+    </div>
+  );
 }
 
 export default function ResultsPage() {
-  const { results } = useSearchStore();
-  const [selectedSongData, setSelectedSongData] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { results, isLoading, searchSongs } = useSearchStore();
+  const { socket } = useWebSocket();
+  const router = useRouter();
 
-  const handleViewDetails = async (song: any) => {
+  const handleSearch = async (query: string) => {
+    if (!query.trim()) return;
+    await searchSongs(query);
+  };
+
+  // When a song is selected in the results page, emit "songSelected" and navigate
+  const handleSelectSong = (song: SongDetails) => {
     try {
-      // Log the clicked song for debugging
-      console.log("Clicked song:", song);
-
-      // Fetch the songs data
-      const response = await fetch("/data/songs.json");
-      const data = await response.json();
-
-      // Log the fetched data for debugging
-      console.log("Fetched data:", data);
-
-      // Find the full song details
-      const fullSongData = data.songs.find((s: any) => s.id === song.id);
-
-      // Log the found song data for debugging
-      console.log("Found song data:", fullSongData);
-
-      if (fullSongData) {
-        setSelectedSongData(fullSongData);
-        setIsModalOpen(true);
-      } else {
-        console.error("Song not found in data");
-      }
-    } catch (error) {
-      console.error("Error fetching song details:", error);
+      socket?.emit("songSelected", song);
+      router.push("/admin/live");
+    } catch (err) {
+      console.error("Error selecting song:", err);
     }
   };
 
   return (
-    <div className="p-6">
-      <h2 className="text-xl font-semibold mb-6">Search Results</h2>
+    <div className="min-h-screen bg-gradient-to-br from-green-100 via-yellow-50 to-pink-100">
+      <div className="max-w-4xl mx-auto p-6 space-y-8">
+        <h1 className="text-3xl font-bold text-center text-gray-800">
+          Search Results
+        </h1>
 
-      {/* Debug info */}
-      <div className="text-sm text-gray-500 mb-4">
-        Number of results: {results.length}
+        <div className="w-full max-w-2xl mx-auto">
+          <SearchInput
+            placeholder="Search any song..."
+            onSearch={handleSearch}
+            className="w-full"
+          />
+        </div>
+
+        {isLoading ? (
+          <div className="flex justify-center py-8">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500" />
+          </div>
+        ) : results.length > 0 ? (
+          <div className="space-y-4">
+            <div className="bg-white rounded-lg shadow divide-y">
+              {results.map((song) => (
+                <SongItem
+                  key={song.id}
+                  song={song}
+                  onSelect={handleSelectSong}
+                />
+              ))}
+            </div>
+          </div>
+        ) : (
+          <div className="text-center text-gray-500 py-8">
+            No results to display.
+          </div>
+        )}
       </div>
-
-      {results.length === 0 ? (
-        <p className="text-gray-600">No results to display.</p>
-      ) : (
-        <ul className="mt-4 grid gap-4">
-          {results.map((song) => (
-            <li
-              key={song.id}
-              className="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow"
-            >
-              <div className="flex justify-between items-center">
-                <div>
-                  <h3 className="font-semibold text-lg">{song.title}</h3>
-                  <p className="text-gray-600">{song.artist}</p>
-                  {/* Debug info */}
-                  <p className="text-xs text-gray-400">ID: {song.id}</p>
-                </div>
-                <button
-                  onClick={() => handleViewDetails(song)}
-                  className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
-                >
-                  View Details
-                </button>
-              </div>
-            </li>
-          ))}
-        </ul>
-      )}
-
-      {/* Chord Display Modal */}
-      {selectedSongData && (
-        <ChordDisplay
-          isOpen={isModalOpen}
-          onClose={() => {
-            setIsModalOpen(false);
-            setSelectedSongData(null);
-          }}
-          songData={selectedSongData}
-        />
-      )}
     </div>
   );
 }

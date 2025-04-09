@@ -24,36 +24,38 @@ export default function SearchPage() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6 space-y-8">
-      <h1 className="text-3xl font-bold text-center text-gray-800">
-        Search Results
-      </h1>
+    <div className="min-h-screen  bg-gradient-to-br from-green-100 via-yellow-50 to-pink-100">
+      <div className="max-w-4xl mx-auto p-6 space-y-8">
+        <h1 className="text-3xl font-bold text-center text-gray-800">
+          Search Results
+        </h1>
 
-      <div className="w-full max-w-2xl mx-auto">
-        <SearchInput
-          placeholder="Search any song..."
-          onSearch={handleSearch}
-          className="w-full"
-        />
-      </div>
-
-      {isLoading ? (
-        <div className="flex justify-center py-8">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500" />
+        <div className="w-full max-w-2xl mx-auto">
+          <SearchInput
+            placeholder="Search any song..."
+            onSearch={handleSearch}
+            className="w-full"
+          />
         </div>
-      ) : results.length > 0 ? (
-        <div className="space-y-4">
-          <div className="bg-white rounded-lg shadow divide-y">
-            {results.map((song) => (
-              <SongItem key={song.id} song={song} />
-            ))}
+
+        {isLoading ? (
+          <div className="flex justify-center py-8">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500" />
           </div>
-        </div>
-      ) : query && !isLoading ? (
-        <div className="text-center text-gray-500 py-8">
-          No songs found for "{query}"
-        </div>
-      ) : null}
+        ) : results.length > 0 ? (
+          <div className="space-y-4">
+            <div className="bg-white rounded-lg shadow divide-y">
+              {results.map((song) => (
+                <SongItem key={song.id} song={song} />
+              ))}
+            </div>
+          </div>
+        ) : query && !isLoading ? (
+          <div className="text-center text-gray-500 py-8">
+            No songs found for "{query}"
+          </div>
+        ) : null}
+      </div>
     </div>
   );
 }
@@ -85,7 +87,7 @@ function SongItem({ song }: { song: Song }) {
             )}
           </div>
           <div>
-            <h3 className="text-lg font-medium text-gray-900">{song.title}</h3>
+            <h3 className="text-xl font-medium text-gray-900">{song.title}</h3>
             <p className="text-sm text-gray-500">{song.artist}</p>
           </div>
         </div>

@@ -35,11 +35,9 @@ export const useSearchStore = create<SearchState>((set) => ({
   searchSongs: async (query) => {
     set({ isLoading: true });
     try {
-      // Simulate API delay
-      await new Promise((resolve) => setTimeout(resolve, 500));
-
+      // Fetch songs data
       const filteredSongs = songsData.songs.filter(
-        (song) =>
+        (song: Song) =>
           song.title.toLowerCase().includes(query.toLowerCase()) ||
           song.artist.toLowerCase().includes(query.toLowerCase())
       );

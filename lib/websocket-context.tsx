@@ -1,13 +1,24 @@
+// lib/websocket-context.tsx
 "use client";
-import React, { createContext, useContext, useEffect, useState } from "react";
+
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+} from "react";
+import { io, Socket } from "socket.io-client";
+
+export interface SongDetails {
+  title: string;
+  artist: string;
+  lyrics: { lyrics: string; chords?: string }[][];
+}
 
 interface WebSocketContextType {
-  socket: WebSocket | null;
-  currentSong: {
-    title: string;
-    artist: string;
-    lyrics: Array<Array<{ lyrics: string; chords?: string }>>;
-  } | null;
+  socket: Socket | null;
+  currentSong: SongDetails | null;
 }
 
 const WebSocketContext = createContext<WebSocketContextType>({
@@ -15,32 +26,32 @@ const WebSocketContext = createContext<WebSocketContextType>({
   currentSong: null,
 });
 
-export function WebSocketProvider({ children }: { children: React.ReactNode }) {
-  const [socket, setSocket] = useState<WebSocket | null>(null);
-  const [currentSong, setCurrentSong] = useState(null);
+export const WebSocketProvider = ({ children }: { children: ReactNode }) => {
+  const [socket, setSocket] = useState<Socket | null>(null);
+  const [currentSong, setCurrentSong] = useState<SongDetails | null>(null);
 
   useEffect(() => {
-    const ws = new WebSocket(
-      process.env.NEXT_PUBLIC_WEBSOCKET_URL || "ws://localhost:3001"
-    );
+    const socketIo = io("http://localhost:3000");
+    setSocket(socketIo);
 
-    ws.onopen = () => {
-      console.log("WebSocket Connected");
-    };
+    // Once connected, ask for the current song
+    socketIo.on("connect", () => {
+      socketIo.emit("getCurrentSong");
+    });
 
-    ws.onmessage = (event) => {
-      const data = JSON.parse(event.data);
-      if (data.type === "SONG_SELECTED") {
-        setCurrentSong(data.song);
-      } else if (data.type === "SONG_ENDED") {
-        setCurrentSong(null);
-      }
-    };
+    // Listen for song selection events
+    socketIo.on("songSelected", (data: SongDetails) => {
+      console.log("Received songSelected event:", data);
+      setCurrentSong(data);
+    });
 
-    setSocket(ws);
+    // Listen for the rehearsal end event to reset the song state
+    socketIo.on("rehearsalEnded", () => {
+      setCurrentSong(null);
+    });
 
     return () => {
-      ws.close();
+      socketIo.disconnect();
     };
   }, []);
 
@@ -49,6 +60,6 @@ export function WebSocketProvider({ children }: { children: React.ReactNode }) {
       {children}
     </WebSocketContext.Provider>
   );
-}
+};
 
 export const useWebSocket = () => useContext(WebSocketContext);

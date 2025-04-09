@@ -12,18 +12,21 @@ export const signup = async (values: z.infer<typeof RegisterSchema>) => {
     return { error: validatedFields.error.errors[0].message };
   }
 
-  const { email, password, instrument } = validatedFields.data;
+  const { email, password, instrument, role } = validatedFields.data;
   const hashedPassword = await bcrypt.hash(password, 10);
   const existingUser = await getUserByEmail(email);
+
   if (existingUser) {
     return { error: "האיימיל הזה כבר בשימוש!" };
   }
+
   try {
     const newUser = await prisma.user.create({
       data: {
         email,
         password: hashedPassword,
         instrument,
+        role: role || "REGULAR", // Default to REGULAR if no role specified
       },
     });
   } catch (error) {
