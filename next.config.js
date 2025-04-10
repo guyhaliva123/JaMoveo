@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["localhost"],
+    domains: ["localhost", "jamoveo-production-88c4.up.railway.app"],
   },
   typescript: {
     ignoreBuildErrors: false,

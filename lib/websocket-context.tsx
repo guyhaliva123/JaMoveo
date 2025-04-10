@@ -30,7 +30,9 @@ export const WebSocketProvider = ({ children }: { children: ReactNode }) => {
   const [currentSong, setCurrentSong] = useState<SongDetails | null>(null);
 
   useEffect(() => {
-    const socketIo = io("http://localhost:3000");
+    const socketIo = io(
+      typeof window !== "undefined" ? window.location.origin : ""
+    );
     setSocket(socketIo);
 
     socketIo.on("connect", () => {
