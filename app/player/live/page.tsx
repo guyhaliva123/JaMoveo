@@ -16,7 +16,6 @@ export default function LivePlayerPage() {
     if (!session?.user?.email) return;
     const instrument = await getUserInstrument(session.user.email);
     setInstrument(instrument?.instrument || "");
-    console.log(instrument);
   };
 
   useEffect(() => {
@@ -62,16 +61,6 @@ export default function LivePlayerPage() {
       className="min-h-screen bg-gradient-to-br from-green-100 via-yellow-50 to-pink-100 overflow-auto"
     >
       <div className="max-w-4xl mx-auto p-6">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold mb-2">{currentSong.title}</h1>
-          <p className="text-xl text-gray-600">{currentSong.artist}</p>
-          {isVocalist && (
-            <p className="mt-2 text-sm bg-blue-100 text-blue-800 px-3 py-1 rounded-full inline-block">
-              Vocalist View
-            </p>
-          )}
-        </div>
-
         <div className="bg-white rounded-lg shadow-lg p-8">
           <div className="font-mono text-center font-semibold">
             {currentSong.lyrics.map((line, lineIndex) => (
