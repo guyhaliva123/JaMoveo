@@ -1,5 +1,7 @@
 "use client";
+
 // Results page that displays search results and starts the rehearsal
+
 import { useSearchStore } from "@/lib/searchStore";
 import { useRouter } from "next/navigation";
 import { useWebSocket } from "@/lib/websocket-context";
@@ -70,7 +72,7 @@ export default function ResultsPage() {
     await searchSongs(query);
   };
 
-  // When a song is selected in the results page, emit "songSelected" and navigate
+  // when a song is selected in the results page, emit "songSelected" and navigate
   const handleSelectSong = (song: SongDetails) => {
     try {
       socket?.emit("songSelected", song);

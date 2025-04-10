@@ -1,7 +1,6 @@
 "use server";
 
 import { prisma } from "@/lib/db";
-import { getSession } from "next-auth/react";
 
 export const getUserByEmail = async (email: string) => {
   try {

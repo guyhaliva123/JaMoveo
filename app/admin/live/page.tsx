@@ -22,14 +22,14 @@ export default function LiveAdminPage() {
     fetchUserInstrument();
   }, [session]);
 
-  // Automatically scroll to top when a new song is selected.
+  // useEffect to automatically scroll to the top of the page when a new song is selected.
   useEffect(() => {
     if (currentSong) {
       scrollRef.current?.scrollTo(0, 0);
     }
   }, [currentSong]);
 
-  // Listen for remote scroll commands and rehearsal quit events.
+  // listen for remote scroll commands and rehearsal quit events.
   useEffect(() => {
     if (!socket) return;
 
@@ -48,26 +48,23 @@ export default function LiveAdminPage() {
     };
   }, [socket]);
 
-  // Fallback: if currentSong becomes null, also force redirect.
   useEffect(() => {
     if (!currentSong) {
       window.location.href = "/admin";
     }
   }, [currentSong]);
 
-  // Emit scroll position whenever admin scrolls.
   const handleScroll = () => {
     if (scrollRef.current) {
       socket?.emit("syncScroll", scrollRef.current.scrollTop);
     }
   };
 
-  // When admin clicks End Rehearsal, emit the quit event.
   const handleQuit = () => {
     socket?.emit("quitRehearsal");
   };
 
-  // When both the socket and session are available, emit a joinRehearsal event
+  // listen to the  socket and session, and emit a joinRehearsal event when both are available.
   useEffect(() => {
     if (socket && session && session.user) {
       socket.emit("joinRehearsal", { instrument: session.user.instrument });

@@ -26,7 +26,7 @@ export const signup = async (values: z.infer<typeof RegisterSchema>) => {
         email,
         password: hashedPassword,
         instrument,
-        role: role || "REGULAR", // Default to REGULAR if no role specified
+        role: role || "REGULAR", // default to REGULAR if no role specified
       },
     });
   } catch (error) {

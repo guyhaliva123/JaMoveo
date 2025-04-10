@@ -1,5 +1,5 @@
 "use client";
-// Main admin dashboard (search page + dashboard stats)
+// main admin dashboard (search page + dashboard stats)
 import { useEffect } from "react";
 import { SearchInput } from "@/components/ui/searchInput";
 import { LogoutButton } from "@/components/auth/logout-button";
@@ -14,7 +14,7 @@ export default function AdminDashboard() {
   const { searchSongs } = useSearchStore();
   const totalSongs = songsData.songs.length;
 
-  // Listen for admin's own selection (or any broadcast)…
+  // listen for admin's own selection (or any broadcast)
   useEffect(() => {
     if (!socket) return;
 

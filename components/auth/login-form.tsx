@@ -17,8 +17,8 @@ import { login } from "@/actions/login";
 import { useRouter } from "next/navigation";
 import io from "socket.io-client";
 
-// Connect to your Socket.IO server
-const socket = io("http://localhost:3000"); // adjust the URL/port as needed
+// Connect to Socket.IO server
+const socket = io("http://localhost:3000");
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
@@ -42,11 +42,9 @@ export default function LoginForm() {
   };
 
   useEffect(() => {
-    // Listen to the event that beamed the song details
     socket.on("songSelected", (songData) => {
       setSong(songData);
     });
-    // Cleanup the listener on component unmount
     return () => {
       socket.off("songSelected");
     };

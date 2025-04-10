@@ -1,4 +1,3 @@
-// lib/websocket-context.tsx
 "use client";
 
 import React, {
@@ -34,18 +33,14 @@ export const WebSocketProvider = ({ children }: { children: ReactNode }) => {
     const socketIo = io("http://localhost:3000");
     setSocket(socketIo);
 
-    // Once connected, ask for the current song
     socketIo.on("connect", () => {
       socketIo.emit("getCurrentSong");
     });
 
-    // Listen for song selection events
     socketIo.on("songSelected", (data: SongDetails) => {
-      console.log("Received songSelected event:", data);
       setCurrentSong(data);
     });
 
-    // Listen for the rehearsal end event to reset the song state
     socketIo.on("rehearsalEnded", () => {
       setCurrentSong(null);
     });

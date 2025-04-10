@@ -16,6 +16,6 @@ export async function checkAdminExists() {
     return false;
   } catch (error) {
     console.error("Error checking admin count:", error);
-    return false; // Default to true to prevent admin creation on error
+    return false;
   }
 }

@@ -1,12 +1,12 @@
 "use client";
-// Song search page with input and results list
+// song search page with input and results list
 import React, { Suspense, useEffect } from "react";
 import { SearchInput } from "@/components/ui/searchInput";
 import { useSearchStore } from "@/lib/searchStore";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 
-// This component uses the client-side hooks
+// this component uses the client-side hooks
 function SearchContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -59,7 +59,7 @@ function SearchContent() {
   );
 }
 
-// This remains the main page component (can be a Server Component)
+// this is the main page component
 export default function SearchPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-100 via-yellow-50 to-pink-100">

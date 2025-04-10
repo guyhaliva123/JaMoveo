@@ -8,7 +8,7 @@ const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
-let currentSongData: any = null; // Global variable for the current song
+let currentSongData: any = null; // global variable for the current song
 
 async function startServer() {
   await app.prepare();
@@ -16,11 +16,6 @@ async function startServer() {
   const httpServer = createServer((req, res) => {
     try {
       const parsedUrl = parse(req.url || "", true);
-
-      // Log API requests for debugging
-      if (parsedUrl.pathname?.startsWith("/api/auth")) {
-        console.log(`Auth request: ${parsedUrl.pathname}`);
-      }
 
       handle(req, res, parsedUrl);
     } catch (err) {
