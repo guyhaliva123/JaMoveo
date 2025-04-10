@@ -16,7 +16,6 @@ async function startServer() {
   const httpServer = createServer((req, res) => {
     try {
       const parsedUrl = parse(req.url || "", true);
-
       handle(req, res, parsedUrl);
     } catch (err) {
       console.error("Error handling request:", err);
@@ -27,37 +26,33 @@ async function startServer() {
 
   const io = new SocketIOServer(httpServer, {
     cors: {
-      origin: "*", // Adjust this for production
+      origin: "*", // You can tighten this up in prod
     },
   });
 
   io.on("connection", (socket) => {
     console.log(`[Socket.IO] Client connected: ${socket.id}`);
 
-    // When a client connects, send the current song (if any)
     socket.on("getCurrentSong", () => {
       if (currentSongData) {
         socket.emit("songSelected", currentSongData);
       }
     });
 
-    // Handle song selection
     socket.on("songSelected", (data) => {
       console.log(`Song selected: ${data.title} by ${data.artist}`);
-      currentSongData = data; // Save the song globally
-      io.emit("songSelected", data); // Broadcast to all clients
+      currentSongData = data;
+      io.emit("songSelected", data);
     });
 
-    // Handle scroll syncing (unchanged)
     socket.on("syncScroll", (scrollTop: number) => {
       io.emit("scrollTo", scrollTop);
     });
 
-    // Handle rehearsal quit:
     socket.on("quitRehearsal", () => {
       console.log("Rehearsal ended");
-      currentSongData = null; // Reset the current song
-      io.emit("rehearsalEnded"); // Notify all connected clients
+      currentSongData = null;
+      io.emit("rehearsalEnded");
     });
 
     socket.on("disconnect", () => {
@@ -65,9 +60,11 @@ async function startServer() {
     });
   });
 
-  const port = process.env.PORT || 3000;
-  httpServer.listen(port, () => {
-    console.log(`> Server ready on http://localhost:${port}`);
+  const port = parseInt(process.env.PORT || "8080", 10);
+  const host = "0.0.0.0"; // 👈 Required for Railway and Docker
+
+  httpServer.listen(port, host, () => {
+    console.log(`> Server ready on http://${host}:${port}`);
   });
 }
 
