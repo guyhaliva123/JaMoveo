@@ -1,36 +1,90 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ja-Moveo
+
+A real-time music collaboration platform built with Next.js, Socket.io, and Prisma.
+
+## Project Overview
+
+Ja-Moveo is a web application that allows musicians to collaborate in real-time. The platform supports different instruments including drums, guitar, bass, saxophone, keyboard, and vocals. Users can register, log in, and join live music sessions where they can play together with other musicians.
+
+## Features
+
+- **User Authentication**: Complete authentication system with login and signup functionality
+- **Real-time Collaboration**: Live music sessions using Socket.io
+- **Role-based Access**: Different roles (Admin, Regular) with appropriate permissions
+- **Instrument Selection**: Users can select their preferred instrument
+- **Responsive UI**: Modern UI built with TailwindCSS and Radix UI components
+
+## Tech Stack
+
+- **Frontend**: React 19, Next.js 15
+- **Backend**: Node.js with Next.js API routes and custom server
+- **Database**: PostgreSQL with Prisma ORM
+- **Authentication**: NextAuth.js
+- **Real-time Communication**: Socket.io
+- **Styling**: TailwindCSS
+- **State Management**: Zustand
+- **Form Validation**: Zod
+
+## Prerequisites
+
+- Node.js (v18 or higher recommended)
+- PostgreSQL database
 
 ## Getting Started
 
-First, run the development server:
+### 1. Clone the repository
+
+```bash
+git clone <repository-url>
+cd my-app
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Set up environment variables
+
+Create a `.env` file in the root of the project with the following variables:
+
+```
+DATABASE_URL="postgresql://username:password@localhost:5432/ja-moveo"
+NEXTAUTH_SECRET="your-secret-here"
+```
+
+### 4. Set up the database
+
+```bash
+npx prisma generate
+npx prisma db push
+```
+
+### 5. Start the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The application will be available at http://localhost:3000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Build for Production
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm run start
+```
 
-## Learn More
+## Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+- `/app`: Next.js application pages and components
+- `/components`: Reusable UI components
+- `/prisma`: Database schema and migrations
+- `/actions`: Server actions
+- `/lib`: Utility functions and helpers
+- `/public`: Static assets
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+[MIT](https://choosealicense.com/licenses/mit/)

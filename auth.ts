@@ -56,6 +56,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   secret: process.env.AUTH_SECRET as string,
   jwt: { maxAge: 365 * 24 * 60 * 60 },
   session: { strategy: "jwt", maxAge: 365 * 24 * 60 * 60 },
+  basePath: "/api/auth",
 } satisfies NextAuthConfig);
 
 declare module "next-auth" {

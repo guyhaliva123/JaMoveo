@@ -1,7 +1,7 @@
 "use client";
 
 import type React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -15,15 +15,19 @@ import {
 import Link from "next/link";
 import { login } from "@/actions/login";
 import { useRouter } from "next/navigation";
+import io from "socket.io-client";
+
+// Connect to your Socket.IO server
+const socket = io("http://localhost:3000"); // adjust the URL/port as needed
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
+  const [song, setSong] = useState(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(email, password);
     const result = await login(email, password);
 
     if (result.error) {
@@ -36,6 +40,17 @@ export default function LoginForm() {
       router.refresh();
     }
   };
+
+  useEffect(() => {
+    // Listen to the event that beamed the song details
+    socket.on("songSelected", (songData) => {
+      setSong(songData);
+    });
+    // Cleanup the listener on component unmount
+    return () => {
+      socket.off("songSelected");
+    };
+  }, []);
 
   return (
     <div>
@@ -87,6 +102,11 @@ export default function LoginForm() {
           </div>
         </CardFooter>
       </Card>
+      {song && (
+        <div className="mt-4 text-center text-gray-600">
+          Selected Song: {JSON.stringify(song)}
+        </div>
+      )}
     </div>
   );
 }

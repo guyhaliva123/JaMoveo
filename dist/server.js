@@ -7,6 +7,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const http_1 = require("http");
 const next_1 = __importDefault(require("next"));
 const socket_io_1 = require("socket.io");
+const url_1 = require("url");
 const dev = process.env.NODE_ENV !== "production";
 const app = (0, next_1.default)({ dev });
 const handle = app.getRequestHandler();
@@ -14,7 +15,20 @@ let currentSongData = null; // Global variable for the current song
 async function startServer() {
     await app.prepare();
     const httpServer = (0, http_1.createServer)((req, res) => {
-        handle(req, res);
+        var _a;
+        try {
+            const parsedUrl = (0, url_1.parse)(req.url || "", true);
+            // Log API requests for debugging
+            if ((_a = parsedUrl.pathname) === null || _a === void 0 ? void 0 : _a.startsWith("/api/auth")) {
+                console.log(`Auth request: ${parsedUrl.pathname}`);
+            }
+            handle(req, res, parsedUrl);
+        }
+        catch (err) {
+            console.error("Error handling request:", err);
+            res.statusCode = 500;
+            res.end("Internal Server Error");
+        }
     });
     const io = new socket_io_1.Server(httpServer, {
         cors: {

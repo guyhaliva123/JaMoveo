@@ -1,10 +1,14 @@
 "use client";
 
 import { ReactNode } from "react";
+import { SessionProvider } from "next-auth/react";
 // Remove duplicate WebSocketProvider import
 // import { WebSocketProvider } from "@/lib/websocket-context";
 
 export default function ClientProviders({ children }: { children: ReactNode }) {
-  // Just return children without wrapping in a duplicate WebSocketProvider
-  return <>{children}</>;
+  return (
+    <SessionProvider refetchInterval={0} refetchOnWindowFocus={false}>
+      {children}
+    </SessionProvider>
+  );
 }

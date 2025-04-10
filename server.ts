@@ -2,6 +2,7 @@
 import { createServer } from "http";
 import next from "next";
 import { Server as SocketIOServer } from "socket.io";
+import { parse } from "url";
 
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
@@ -13,7 +14,20 @@ async function startServer() {
   await app.prepare();
 
   const httpServer = createServer((req, res) => {
-    handle(req, res);
+    try {
+      const parsedUrl = parse(req.url || "", true);
+
+      // Log API requests for debugging
+      if (parsedUrl.pathname?.startsWith("/api/auth")) {
+        console.log(`Auth request: ${parsedUrl.pathname}`);
+      }
+
+      handle(req, res, parsedUrl);
+    } catch (err) {
+      console.error("Error handling request:", err);
+      res.statusCode = 500;
+      res.end("Internal Server Error");
+    }
   });
 
   const io = new SocketIOServer(httpServer, {

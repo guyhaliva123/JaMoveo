@@ -3,7 +3,8 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 // Define authentication paths
-const authPaths = ["/login", "/sign-up", "/api/auth"];
+const authPaths = ["/login", "/sign-up"];
+const authApiPaths = ["/api/auth"];
 
 // Define role-based paths
 const adminPaths = ["/admin"];
@@ -11,6 +12,12 @@ const playerPaths = ["/player"];
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
+
+  // Skip middleware for Auth.js API routes
+  if (pathname.startsWith("/api/auth")) {
+    return NextResponse.next();
+  }
+
   const token = await getToken({
     req: request,
     secret: process.env.AUTH_SECRET,
@@ -24,7 +31,11 @@ export async function middleware(request: NextRequest) {
   }
 
   // If user is not logged in and tries to access protected paths
-  if (!token && !authPaths.some((path) => pathname.startsWith(path))) {
+  if (
+    !token &&
+    !authPaths.some((path) => pathname.startsWith(path)) &&
+    !authApiPaths.some((path) => pathname.startsWith(path))
+  ) {
     const url = new URL("/login", request.url);
     return NextResponse.redirect(url);
   }

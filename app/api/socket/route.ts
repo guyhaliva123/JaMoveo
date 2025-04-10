@@ -21,14 +21,30 @@ export async function GET() {
     io.on("connection", (socket) => {
       console.log("🔌 client connected:", socket.id);
 
-      socket.on("joinRehearsal", () => {
-        console.log(`Client ${socket.id} joined rehearsal room`);
+      socket.on("joinRehearsal", (data) => {
+        console.log(
+          `Client ${socket.id} joined rehearsal room with instrument: ${data.instrument}`
+        );
+        socket.data.instrument = data.instrument;
         socket.join("rehearsal");
       });
 
       socket.on("selectSong", (song) => {
         console.log(`Song selected by ${socket.id}:`, song);
-        io.to("rehearsal").emit("songSelected", song);
+        const clients = io.sockets.adapter.rooms.get("rehearsal");
+        if (clients) {
+          clients.forEach((clientId) => {
+            const clientSocket = io.sockets.sockets.get(clientId);
+            if (clientSocket) {
+              const instrument = clientSocket.data.instrument;
+              if (instrument && instrument.toUpperCase() === "VOCALS") {
+                clientSocket.emit("songSelected", { lyrics: song.lyrics });
+              } else {
+                clientSocket.emit("songSelected", song);
+              }
+            }
+          });
+        }
       });
 
       socket.on("syncScroll", (y: number) => {
