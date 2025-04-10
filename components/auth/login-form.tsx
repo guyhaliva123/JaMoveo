@@ -1,7 +1,7 @@
 "use client";
 
-import type React from "react";
-import { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -14,17 +14,45 @@ import {
 } from "@/components/ui/card";
 import Link from "next/link";
 import { login } from "@/actions/login";
-import { useRouter } from "next/navigation";
-import io from "socket.io-client";
 
-// Connect to Socket.IO server
-const socket = io("http://localhost:3000");
+// Custom Error Boundary Component
+class ErrorBoundary extends React.Component<
+  { children: React.ReactNode },
+  { hasError: boolean }
+> {
+  constructor(props: { children: React.ReactNode }) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(/* error */) {
+    // Update state so the next render shows the fallback UI.
+    return { hasError: true };
+  }
+
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+    // Log the error to an error reporting service if desired
+    console.error("Error Boundary caught an error:", error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      // Fallback UI in case of an error
+      return (
+        <div className="p-4 bg-red-100 text-red-700 text-center">
+          Something went wrong. Please try refreshing the page.
+        </div>
+      );
+    }
+
+    return this.props.children;
+  }
+}
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
-  const [song, setSong] = useState(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -41,17 +69,8 @@ export default function LoginForm() {
     }
   };
 
-  useEffect(() => {
-    socket.on("songSelected", (songData) => {
-      setSong(songData);
-    });
-    return () => {
-      socket.off("songSelected");
-    };
-  }, []);
-
   return (
-    <div>
+    <ErrorBoundary>
       <Card className="w-full bg-white shadow-lg">
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl font-bold text-center">
@@ -100,11 +119,6 @@ export default function LoginForm() {
           </div>
         </CardFooter>
       </Card>
-      {song && (
-        <div className="mt-4 text-center text-gray-600">
-          Selected Song: {JSON.stringify(song)}
-        </div>
-      )}
-    </div>
+    </ErrorBoundary>
   );
 }

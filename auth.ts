@@ -53,10 +53,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     },
   },
   adapter: PrismaAdapter(prisma),
-  secret: process.env.AUTH_SECRET as string,
+  secret: process.env.NEXTAUTH_SECRET as string,
   jwt: { maxAge: 365 * 24 * 60 * 60 },
   session: { strategy: "jwt", maxAge: 365 * 24 * 60 * 60 },
   basePath: "/api/auth",
+  trustHost: true,
 } satisfies NextAuthConfig);
 
 declare module "next-auth" {
