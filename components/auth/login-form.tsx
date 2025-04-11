@@ -56,16 +56,20 @@ export default function LoginForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const result = await login(email, password);
+    try {
+      const result = await login(email, password);
 
-    if (result.error) {
-      console.error("Login failed:", result.error);
-      return;
-    }
+      if (result && result.error) {
+        console.error("Login failed:", result.error);
+        return;
+      }
 
-    if (result.success) {
-      router.push("/");
-      router.refresh();
+      if (result && result.success) {
+        router.push("/");
+        router.refresh();
+      }
+    } catch (error) {
+      console.error("Login error:", error);
     }
   };
 
