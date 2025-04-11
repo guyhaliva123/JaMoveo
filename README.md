@@ -6,6 +6,17 @@ A real-time music collaboration platform built with Next.js, Socket.io, and Pris
 
 Ja-Moveo is a web application that allows musicians to collaborate in real-time. The platform supports different instruments including drums, guitar, bass, saxophone, keyboard, and vocals. Users can register, log in, and join live music sessions where they can play together with other musicians.
 
+## Production URL
+
+The application is deployed and accessible at: https://jamoveo-production-88c4.up.railway.app/login
+
+### Admin Access
+
+To access the admin features, use the following credentials:
+
+- Email: haliva@gmail.com
+- Password: 121212
+
 ## Features
 
 - **User Authentication**: Complete authentication system with login and signup functionality
@@ -52,6 +63,7 @@ Create a `.env` file in the root of the project with the following variables:
 ```
 DATABASE_URL="postgresql://username:password@localhost:5432/ja-moveo"
 NEXTAUTH_SECRET="your-secret-here"
+NEXTAUTH_URL=http://0.0.0.0:8080/
 ```
 
 ### 4. Set up the database
@@ -61,13 +73,21 @@ npx prisma generate
 npx prisma db push
 ```
 
-### 5. Start the development server
+### 5. View and manage the database (optional)
+
+```bash
+npx prisma studio
+```
+
+This opens Prisma Studio in your browser, a visual database management tool.
+
+### 6. Start the development server
 
 ```bash
 npm run dev
 ```
 
-The application will be available at http://localhost:3000.
+The application will be available at http://0.0.0.0:8080
 
 ## Build for Production
 
