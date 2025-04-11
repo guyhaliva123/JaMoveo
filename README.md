@@ -17,6 +17,21 @@ To access the admin features, use the following credentials:
 - Email: haliva@gmail.com
 - Password: 121212
 
+## Available Songs
+
+Administrators can search and manage the following songs in the system:
+
+1. "veech shelo" by Ariel Zilber
+2. "Bohemian Rhapsody" by Queen
+3. "Imagine" by John Lennon
+4. "Wonderwall" by Oasis
+5. "Hotel California" by Eagles
+6. "Let It Be" by The Beatles
+7. "Yesterday" by The Beatles
+8. "Hey Jude" by The Beatles
+
+Each song includes lyrics and chord notations for collaborative play sessions.
+
 ## Features
 
 - **User Authentication**: Complete authentication system with login and signup functionality
