@@ -58,6 +58,21 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   session: { strategy: "jwt", maxAge: 365 * 24 * 60 * 60 },
   basePath: "/api/auth",
   trustHost: true,
+  cookies: {
+    sessionToken: {
+      name: `__Secure-next-auth.session-token`,
+      options: {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
+        path: "/",
+        domain:
+          process.env.NODE_ENV === "production"
+            ? "jamoveo-production-88c4.up.railway.app"
+            : undefined,
+      },
+    },
+  },
 } satisfies NextAuthConfig);
 
 declare module "next-auth" {
