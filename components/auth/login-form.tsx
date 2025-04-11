@@ -56,20 +56,16 @@ export default function LoginForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    try {
-      const result = await login(email, password);
+    const result = await login(email, password);
 
-      if (result.error) {
-        console.error("Login failed:", result.error);
-        return;
-      }
+    if (result.error) {
+      console.error("Login failed:", result.error);
+      return;
+    }
 
-      if (result.success) {
-        // Use window.location instead of router.push for more reliable redirects in production
-        window.location.href = "/";
-      }
-    } catch (error) {
-      console.error("An error occurred during login:", error);
+    if (result.success) {
+      router.push("/");
+      router.refresh();
     }
   };
 
